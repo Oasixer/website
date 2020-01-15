@@ -1,17 +1,21 @@
 <script>
   export let header;
-  export let points;
 </script>
 
 <style>
-  ul{
-    list-style-type: circle;
+  div.section-main{
+  }
+  
+  div.section-content{
+    margin: 10px 0 0 0;
   }
 
   h1{
     width: fit-content;
     padding: 0;
     margin: 0;
+    color: purple;
+    font-size: 24px;
   }
 
   div.line{
@@ -25,5 +29,7 @@
   <h1>{header}</h1>
   <div class="line">
   </div>
-  <slot></slot>
+  <div class='section-content'>
+    <slot></slot>
+  </div>
 </div>

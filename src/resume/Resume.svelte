@@ -3,7 +3,63 @@
   import Skills from './sections/Skills.svelte';
   import Education from './sections/Education.svelte';
   import SideProjects from './sections/SideProjects.svelte';
+  import Awards from './sections/Awards.svelte';
   import Header from './components/Header.svelte';
+  import Modal from './components/SettingsModal.svelte';
+  import Settings from './components/Settings.svelte';
+
+	let showModal = false;
+
+  import { orders, column_setup, ColumnSetups, display_mode } from './utils/settings.js';
+
+  let allSections = [
+  {
+    name: 'WorkExperience',
+    component: WorkExperience,
+    order: {$orders}.WORKEXPERIENCE,
+    group: 'main'
+  },
+  {
+    name: 'SideProjects',
+    component: SideProjects,
+    order: {$orders}.SIDEPROJECTS,
+    group: 'main'
+  },
+  {
+    name: 'Skills',
+    component: Skills,
+    order: {$orders}.SKILLS,
+    group: 'other'
+  },
+  {
+    name: 'Education',
+    component: Education,
+    order: {$orders}.EDUCATION,
+    group: 'other'
+  },
+  {
+    name: 'Awards',
+    component: Awards,
+    order: {$orders}.AWARDS,
+    group: 'other'
+  }
+  ];
+
+  $: mainCol = allSections.filter((i) => {
+    return i.group=='main';
+  }).sort((a, b) => {
+    return a.order - b.order;
+  });
+
+
+  $: console.log(mainCol);
+  
+  $: otherCol = allSections.filter((i) => {
+    return i.group=='other';
+  }).sort((a, b) => {
+    return a.order - b.order;
+  });
+
 </script>
 
 
@@ -30,26 +86,51 @@
     justify-content: space-between;
   }
 
-  div.left{
+  div.col-main{
     flex: 2 0; /* grow shrink basis */
     margin-right: 25px;
   }
   
-  div.right{
+  div.col-other{
     flex: 1 0; /* grow shrink basis */
+  }
+
+  button#modal-button{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 15;
   }
 </style>
 
 <main>
+  <button id="modal-button" on:click="{() => showModal = true}">
+    Show Settings
+  </button>
   <Header/>
   <div class="main-container">
-    <div class="column left">
-      <WorkExperience />
-      <SideProjects />
-    </div>
-    <div class="column right">
-      <Skills />
-      <Education />
-    </div>
+    {#if $column_setup == ColumnSetups.DEFAULT}
+      <div class="column col-main">
+        {#each mainCol as i}
+          <svelte:component this={i.component}/>
+        {/each}
+      </div>
+      <div class="column col-other">
+        {#each otherCol as i}
+          <svelte:component this={i.component}/>
+        {/each}
+      </div>
+    {/if}
   </div>
+
+{#if showModal}
+	<Modal on:close="{() => showModal = false}">
+		<h2 slot="header">
+			Settings
+		</h2>
+    
+    <Settings />
+    
+	</Modal>
+{/if}
 </main>
