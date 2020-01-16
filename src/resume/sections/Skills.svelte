@@ -33,8 +33,6 @@
     // which depends on if the tags are relevant to the loaded tags, and any other overriding settings like
     // disable_coursework_skills
 
-    console.log('should display?');
-
     if (arrayIntersect($tags, [...pointList.points, ...pointList.other_tags]).length>0){
       return true;
     }

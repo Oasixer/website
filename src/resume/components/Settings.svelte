@@ -19,7 +19,7 @@
 
   export let modal;
 
-  $: console.log({$tags});
+  /* $: console.log({$tags}); */
 
   $: bools = [
     {
@@ -89,7 +89,7 @@
           any_missing = true;
         }
       });
-      console.log(any_missing);
+      /* console.log(any_missing); */
       if (any_missing){
         Object.values(TagNames).forEach((i)=>{
           if (!(cur_tags.includes(i))){
