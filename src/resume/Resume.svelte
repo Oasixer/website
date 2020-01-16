@@ -4,13 +4,15 @@
   import Education from './sections/Education.svelte';
   import SideProjects from './sections/SideProjects.svelte';
   import Awards from './sections/Awards.svelte';
+  import Interests from './sections/Interests.svelte';
   import Header from './components/Header.svelte';
   import Modal from './components/SettingsModal.svelte';
   import Settings from './components/Settings.svelte';
 
-	let showModal = false;
+  let showModal = false;
+  let modal; // will be bound to modal instance
 
-  import { orders, single_column, swap_columns, display_mode } from './utils/settings.js';
+  import { orders, single_column, swap_columns, display_mode, disable_interests_section, disable_settings_button } from './utils/settings.js';
 
   let allSections = [
   {
@@ -42,27 +44,34 @@
     component: Awards,
     order: {$orders}.AWARDS,
     group: 'other'
+  },
+  {
+    name: 'Interests',
+    component: Interests,
+    order: {$orders}.INTERESTS,
+    group: 'other'
   }
   ];
 
   $: singleCol = allSections.sort((a, b) => {
     return a.order - b.order;
-  });
+  }).filter(i => !({$disable_interests_section} && i.name=='Interests'));
 
-  $: mainCol = allSections.filter((i) => {
-    return i.group=='main';
-  }).sort((a, b) => {
+  $: mainCol = allSections.filter(i => i.group=='main').sort((a, b) => {
     return a.order - b.order;
   });
 
-
-  $: console.log(mainCol);
-  
-  $: otherCol = allSections.filter((i) => {
-    return i.group=='other';
-  }).sort((a, b) => {
+  $: otherCol = allSections.filter(i => {
+    if (i.group != 'other'){
+      return false;
+    } 
+    if (i.name=='Interests'){
+      return !$disable_interests_section;
+    }
+    return true;
+    }).sort((a, b) => {
     return a.order - b.order;
-  });
+    });
 
 </script>
 
@@ -107,9 +116,11 @@
 </style>
 
 <main>
+  {#if !$disable_settings_button}
   <button id="modal-button" on:click="{() => showModal = true}">
     Show Settings
   </button>
+  {/if}
   <Header/>
   <div class="main-container">
     {#if $single_column}
@@ -146,13 +157,8 @@
   </div>
 
 {#if showModal}
-	<Modal on:close="{() => showModal = false}">
-		<h2 slot="header">
-			Settings
-		</h2>
-    
-    <Settings />
-    
+  <Modal on:close="{() => showModal = false}" bind:this={modal}>
+    <Settings {modal}/>
 	</Modal>
 {/if}
 </main>

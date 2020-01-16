@@ -1,9 +1,11 @@
 <script>
   import ExperienceItem from '../components/ExperienceItem.svelte';
   import { arrayIntersect } from '../utils/misc.js';
-  import { tags } from '../utils/settings.js';
+  import { tags, force_use_all_employment } from '../utils/settings.js';
   export let items;
   export let work;
+
+  /* $: console.log((arrayIntersect(items[0].tags, $tags)).length>0 || (work && $force_use_all_employment)); */
 
 </script>
 
@@ -17,7 +19,7 @@
 
 <div class="experience-list-container">
   {#each items as item}
-    {#if arrayIntersect(item.tags, $tags)}
+    {#if (arrayIntersect(item.tags, $tags)).length>0 || (work && $force_use_all_employment)}
       <ExperienceItem {item} {work}/>
     {/if}
   {/each}

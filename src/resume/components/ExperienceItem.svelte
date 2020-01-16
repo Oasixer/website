@@ -5,6 +5,7 @@
   import {show_project_locations} from '../utils/settings.js';
   import {show_project_positions} from '../utils/settings.js';
   import {show_project_dates} from '../utils/settings.js';
+  import {force_use_all_employment} from '../utils/settings.js';
 
   /* $: console.log(work); */
 

@@ -2,7 +2,7 @@
 	import { createEventDispatcher, onDestroy } from 'svelte';
 
 	const dispatch = createEventDispatcher();
-	const close = () => dispatch('close');
+	export const close = () => dispatch('close');
 
 	let modal;
 
@@ -42,11 +42,7 @@
 <div class="modal-background" on:click={close}></div>
 
 <div class="modal" role="dialog" aria-modal="true" bind:this={modal}>
-	<slot name="header"></slot>
-	<hr>
 	<slot></slot>
-	<hr>
-
 	<!-- svelte-ignore a11y-autofocus -->
 	<button autofocus on:click={close}>close modal</button>
 </div>
@@ -64,9 +60,9 @@
 	.modal {
 		position: absolute;
 		left: 50%;
-		top: 50%;
-		width: calc(100vw - 4em);
-		max-width: 32em;
+		top: 55%;
+		width: calc(100vw - 1em);
+		max-width: 45em;
 		max-height: calc(100vh - 4em);
 		overflow: auto;
 		transform: translate(-50%,-50%);
