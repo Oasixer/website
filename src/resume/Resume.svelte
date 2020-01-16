@@ -10,7 +10,7 @@
 
 	let showModal = false;
 
-  import { orders, column_setup, ColumnSetups, display_mode } from './utils/settings.js';
+  import { orders, single_column, swap_columns, display_mode } from './utils/settings.js';
 
   let allSections = [
   {
@@ -45,6 +45,10 @@
   }
   ];
 
+  $: singleCol = allSections.sort((a, b) => {
+    return a.order - b.order;
+  });
+
   $: mainCol = allSections.filter((i) => {
     return i.group=='main';
   }).sort((a, b) => {
@@ -75,11 +79,11 @@
     display: flex;
     flex-flow: row nowrap;
     margin:0;
-    padding:0;
+    padding: 0 -13px;
   }
 
   div.column {
-    margin: 0;
+    margin: 0 13px;
     padding: 0;
     display: flex;
     flex-flow: column nowrap;
@@ -88,7 +92,6 @@
 
   div.col-main{
     flex: 2 0; /* grow shrink basis */
-    margin-right: 25px;
   }
   
   div.col-other{
@@ -109,17 +112,36 @@
   </button>
   <Header/>
   <div class="main-container">
-    {#if $column_setup == ColumnSetups.DEFAULT}
+    {#if $single_column}
       <div class="column col-main">
-        {#each mainCol as i}
-          <svelte:component this={i.component}/>
+        {#each singleCol as i}
+            <svelte:component this={i.component}/>
         {/each}
       </div>
-      <div class="column col-other">
-        {#each otherCol as i}
-          <svelte:component this={i.component}/>
-        {/each}
-      </div>
+    {:else}
+      {#if $swap_columns}
+        <div class="column col-other">
+          {#each otherCol as i}
+            <svelte:component this={i.component}/>
+          {/each}
+        </div>
+        <div class="column col-main">
+          {#each mainCol as i}
+            <svelte:component this={i.component}/>
+          {/each}
+        </div>
+      {:else}
+        <div class="column col-main">
+          {#each mainCol as i}
+            <svelte:component this={i.component}/>
+          {/each}
+        </div>
+        <div class="column col-other">
+          {#each otherCol as i}
+            <svelte:component this={i.component}/>
+          {/each}
+        </div>
+      {/if}
     {/if}
   </div>
 

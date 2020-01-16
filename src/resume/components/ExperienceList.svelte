@@ -8,11 +8,17 @@
 </script>
 
 <style>
+  div.experience-list-container{
+    margin: 0 0 -15px 0;
+    padding: 0;
+  }
 
 </style>
 
-{#each items as item}
-  {#if arrayIntersect(item.tags, $tags)}
-    <ExperienceItem {item} {work}/>
-  {/if}
-{/each}
+<div class="experience-list-container">
+  {#each items as item}
+    {#if arrayIntersect(item.tags, $tags)}
+      <ExperienceItem {item} {work}/>
+    {/if}
+  {/each}
+</div>

@@ -8,11 +8,17 @@
 <style>
   p{
     margin: 6px 0;
+
+  }
+  div.line-container{
+    margin-bottom: -6px;
   }
 </style>
 
 <Section {header}>
-  {#each lines as line}
-    <p>{line}</p>
-  {/each}
+  <div class='line-container'>
+    {#each lines as line}
+      <p>{line}</p>
+    {/each}
+  </div>
 </Section>

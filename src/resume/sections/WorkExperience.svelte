@@ -11,7 +11,7 @@
       location: 'Toronto',
       position: 'Full Stack Developer',
       date: 'Sep-Dec 2019',
-      points: ['test1', 'test2'],
+      points: ['Led the development of a webapp used nationwide, using svelteJS, Flask, and OracleDB', 'test2'],
       tags: [TagCombos.WEBDEV]
     },
     {

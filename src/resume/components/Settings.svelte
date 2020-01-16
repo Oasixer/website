@@ -3,7 +3,8 @@
     show_project_locations,
     show_project_positions,
     show_project_dates,
-    column_setup,
+    swap_columns,
+    single_column,
     tags,
     orders,
     display_mode
@@ -12,14 +13,28 @@
   $: bools = [
     {
       name: 'Show Project Locations',
-      this: undefined,
-      thing: show_project_locations
+      store: show_project_locations
+    },
+    {
+      name: 'Show Project Dates',
+      store: show_project_dates
+    },
+    {
+      name: 'Show Project Positions',
+      store: show_project_positions
+    },
+    {
+      name: 'Swap Columns',
+      store: swap_columns
+    },
+    {
+      name: 'Single Column',
+      store: single_column
     }
-
   ];
 
   function toggleBool(i){
-    i.thing.update((cur) =>{return !cur});
+    i.store.update((cur) =>{return !cur});
   }
   
 </script>
@@ -103,7 +118,7 @@
   <div class="row">
     <!--  <p>{bool.name}</p><input type="checkbox" checked={bool.store} bind:this={bool.this} on:click={()=>{toggleBool(bool); updateBool(bool);}}>  -->
     <label class="container">{bool.name}
-      <input type="checkbox" checked={bool.store} bind:this={bool.this} on:click={()=>{toggleBool(bool);}}>
+      <input type="checkbox" on:click={()=>{toggleBool(bool);}}>
       <span class="checkmark"></span>
     </label>
   </div>

@@ -11,12 +11,6 @@ export let TagNames = {
   ARDUINO: 8
 }
 
-export let ColumnSetups = {
-  DEFAULT: 'Default 2 Column',
-  SWAPPED: 'Swapped 2 Column',
-  SINGLE: 'Single Column'
-}
-
 export let TagCombos = {
   ALL: Object.values(TagNames),
   WEBDEV: [TagNames.FRONTEND, TagNames.BACKEND]
@@ -34,7 +28,8 @@ export const show_project_locations = writable(false);
 export const show_project_positions = writable(false);
 export const show_project_dates = writable(false);
 
-export const column_setup = writable(ColumnSetups.DEFAULT);
+export const swap_columns = writable(false);
+export const single_column = writable(false);
 
 export const tags = writable(TagCombos.ALL);
 

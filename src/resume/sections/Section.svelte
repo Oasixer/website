@@ -4,10 +4,12 @@
 
 <style>
   div.section-main{
+    margin: 0;
+    margin-bottom: 10px;
   }
   
   div.section-content{
-    margin: 10px 0 0 0;
+    margin: 10px 0 0px 0;
   }
 
   h1{
