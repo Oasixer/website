@@ -1,24 +1,26 @@
 <script>
   import Section from './Section.svelte';
+  import { education_awards_interests_font_size } from '../utils/settings.js';
 
   let header = 'Education';
-  let lines = ['BASc in Mechatronics Engineering', 'University of Waterloo', 'Expected May 2023'];
+  let lines = ['BASc in Mechatronics Engineering', 'University of Waterloo', 'Expected Graduation May 2023'];
 </script>
 
 <style>
   p{
-    margin: 6px 0;
+    margin: 2px 0;
+    /* font-size: 14px; */ /* set with store instead of hardcoded */
 
   }
   div.line-container{
-    margin-bottom: -6px;
+    margin-bottom: -2px;
   }
 </style>
 
 <Section {header}>
   <div class='line-container'>
     {#each lines as line}
-      <p>{line}</p>
+      <p style="font-size: {$education_awards_interests_font_size}px;">{line}</p>
     {/each}
   </div>
 </Section>

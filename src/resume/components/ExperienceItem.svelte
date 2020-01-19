@@ -2,12 +2,15 @@
   export let item;
   export let work;
 
-  import {show_project_locations} from '../utils/settings.js';
-  import {show_project_positions} from '../utils/settings.js';
-  import {show_project_dates} from '../utils/settings.js';
-  import {force_use_all_employment} from '../utils/settings.js';
-
-  /* $: console.log(work); */
+  import { 
+    show_project_locations,
+    show_project_positions,
+    show_project_dates,
+    show_tags_under_experience,
+    disable_categorical_tags,
+    experience_content_font_size,
+    TagCategoryNames
+  } from '../utils/settings.js';
 
 </script>
 
@@ -15,6 +18,13 @@
 
   .experience-item-main{
     margin: 0 0 15px 0;
+  }
+
+  p.experience-tags{
+    font: 300 13px roboto, sans-serif;
+    font-style: italic;
+    text-align: end;
+    margin: 5px 0;
   }
 
   div.row{
@@ -84,10 +94,12 @@
 
   <ul>
   {#each item.points as p}
-    <li>
+    <li style="font-size: {$experience_content_font_size}px;">
       {p}
     </li>
   {/each}
   </ul>
-
+  {#if $show_tags_under_experience}
+    <p class="experience-tags">{item.tags.sort().filter(i=>!(TagCategoryNames.includes(i) && $disable_categorical_tags)).join(', ')}</p>
+  {/if}
 </div>

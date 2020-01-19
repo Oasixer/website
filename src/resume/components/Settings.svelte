@@ -12,6 +12,19 @@
     orders,
     display_mode,
     disable_settings_button,
+    show_tags_under_experience,
+    disable_categorical_tags,
+    top_align_sections,
+    education_awards_interests_font_size,
+    experience_content_font_size,
+    skills_headings_font_size,
+    skills_content_font_size,
+    section_headings_font_size,
+    top_name_top_margin,
+    top_name_bottom_margin,
+    top_name_font_size,
+    num_awards_to_show,
+    num_interests_to_show,
     TagNames
   } from '../utils/settings.js';
 
@@ -23,24 +36,36 @@
 
   $: bools = [
     {
-      name: 'Show Project Locations',
+      name: 'Show project locations',
       store: show_project_locations
     },
     {
-      name: 'Show Project Dates',
+      name: 'Show project dates',
       store: show_project_dates
     },
     {
-      name: 'Show Project Positions',
+      name: 'Show project positions',
       store: show_project_positions
     },
     {
-      name: 'Swap Columns',
+      name: 'Show tags under experience',
+      store: show_tags_under_experience
+    },
+    {
+      name: 'Disable categorical tags',
+      store: disable_categorical_tags
+    },
+    {
+      name: 'Swap columns',
       store: swap_columns
     },
     {
-      name: 'Single Column',
+      name: 'Single column',
       store: single_column
+    },
+    {
+      name: 'Top align sections',
+      store: top_align_sections
     },
     {
       name: 'Force displaying every employment position regardless of tags',
@@ -54,13 +79,61 @@
       name: 'Disable coursework in the skills section',
       store: disable_coursework_skills
     }
-  ];
+  ].sort((a,b)=>a.name<b.name?-1:1);
+
+  $: ints = [
+    {
+      name: 'Education, awards, interests font size',
+      store: education_awards_interests_font_size
+    },
+    {
+      name: 'Experience content font size',
+      store: experience_content_font_size
+    },
+    {
+      name: 'Skills headings font size',
+      store: skills_headings_font_size
+    },
+    {
+      name: 'Skills content font size',
+      store: skills_content_font_size
+    },
+    {
+      name: 'Section headings font size',
+      store: skills_headings_font_size
+    },
+    {
+      name: 'Top name font size (in em)',
+      store: top_name_font_size
+    },
+    {
+      name: 'Top name top margin',
+      store: top_name_top_margin
+    },
+    {
+      name: 'Top name bottom margin',
+      store: top_name_bottom_margin
+    },
+    {
+      name: 'Number of awards to show (top n)',
+      store: num_awards_to_show
+    },
+    {
+      name: 'Number of interets to show (top n)',
+      store: num_interests_to_show
+    }
+  ].sort((a,b)=>a.name<b.name?-1:1);
+
+  function updateStoreValue(i){
+    /* console.log(i); */
+    i.store.set(i.inst.value);
+  }
 
   function toggleBool(i){
     i.store.update((cur) =>{return !cur});
   }
 
-  function boolIsChecked(i){
+  function getStoreValue(i){
     let val;
     // super janky function that uses the store updater to check the value
     // Because I can't get the normal syntax {$i.store} to work here for some reason
@@ -200,6 +273,14 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+
+}
+input[type="number"]{
+  width: 54px;
+  text-align: center;
+  font-size: 16px;
+  height: 25px;
+  margin-right: 8px;
 }
 </style>
 
@@ -208,18 +289,21 @@
     <div class="column-wrap">
       <h3>Settings</h3>
       {#each bools as bool}
-        <!--  <div class="row">  -->
-          <!--  <p>{bool.name}</p><input type="checkbox" checked={bool.store} bind:this={bool.this} on:click={()=>{toggleBool(bool); updateBool(bool);}}>  -->
-          <label class="container">{bool.name}
-            <input type="checkbox" checked={boolIsChecked(bool)} on:click={()=>{toggleBool(bool);}}>
-            <span class="checkmark"></span>
-          </label>
-          <!--  </div>  -->
+        <label class="container">{bool.name}
+          <input type="checkbox" checked={getStoreValue(bool)} on:click={()=>{toggleBool(bool);}}>
+          <span class="checkmark"></span>
+        </label>
+      {/each}
+      {#each ints as int}
+        <div class="row">
+          <input type="number" value={getStoreValue(int)} bind:this={int.inst} on:change={()=>{updateStoreValue(int)}}>
+          <label>{int.name}</label>
+        </div>
       {/each}
     </div>
     <div class="column-wrap">
       <h3>Tags</h3>
-      {#each Object.values(TagNames) as tag}
+      {#each Object.values(TagNames).sort() as tag}
           <label class="container">{tag}
             <input type="checkbox" checked={$tags.includes(tag)} on:click={()=>{toggleTag(tag)}}>
             <span class="checkmark"></span>

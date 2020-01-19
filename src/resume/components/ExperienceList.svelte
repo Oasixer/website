@@ -19,7 +19,7 @@
 
 <div class="experience-list-container">
   {#each items as item}
-    {#if (arrayIntersect(item.tags, $tags)).length>0 || (work && $force_use_all_employment)}
+    {#if (arrayIntersect(item.tags.filter(i=>!item.ignored_tags.includes(i)), $tags)).length>0 || (work && $force_use_all_employment)}
       <ExperienceItem {item} {work}/>
     {/if}
   {/each}

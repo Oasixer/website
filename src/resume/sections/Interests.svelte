@@ -2,6 +2,12 @@
   import Section from './Section.svelte';
   import PointList from '../components/PointList.svelte';
 
+  import 
+  {
+    num_interests_to_show
+  } from '../utils/settings.js';
+
+
   let header = 'Interests';
   let points = [
     'Competitive rock climber for 12 yrs',
@@ -18,5 +24,5 @@
 </style>
 
 <Section {header}>
-  <PointList {points}/>
+  <PointList points={points.slice(Number(0, $num_interests_to_show))}/>
 </Section>

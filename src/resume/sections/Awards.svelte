@@ -2,6 +2,8 @@
   import Section from './Section.svelte';
   import PointList from '../components/PointList.svelte';
 
+  import { num_awards_to_show } from '../utils/settings.js';
+
   let header = 'Awards / Achievements';
   let points = ['CIBC Employee Above & Beyond Award',
     'UTRAHacks 2018 - 2nd place',
@@ -17,5 +19,5 @@
 </style>
 
 <Section {header}>
-  <PointList {points}/>
+  <PointList points={points.slice(0, Number($num_awards_to_show))}/>
 </Section>

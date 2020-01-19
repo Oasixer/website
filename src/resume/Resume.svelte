@@ -12,7 +12,8 @@
   let showModal = false;
   let modal; // will be bound to modal instance
 
-  import { orders, single_column, swap_columns, display_mode, disable_interests_section, disable_settings_button } from './utils/settings.js';
+  import { orders, single_column, swap_columns, display_mode, disable_interests_section, disable_settings_button,
+  top_align_sections} from './utils/settings.js';
 
   let allSections = [
   {
@@ -55,7 +56,7 @@
 
   $: singleCol = allSections.sort((a, b) => {
     return a.order - b.order;
-  }).filter(i => !({$disable_interests_section} && i.name=='Interests'));
+  }).filter(i => !($disable_interests_section && i.name=='Interests'));
 
   $: mainCol = allSections.filter(i => i.group=='main').sort((a, b) => {
     return a.order - b.order;
@@ -124,30 +125,30 @@
   <Header/>
   <div class="main-container">
     {#if $single_column}
-      <div class="column col-main">
+      <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-main">
         {#each singleCol as i}
             <svelte:component this={i.component}/>
         {/each}
       </div>
     {:else}
       {#if $swap_columns}
-        <div class="column col-other">
+        <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-other">
           {#each otherCol as i}
             <svelte:component this={i.component}/>
           {/each}
         </div>
-        <div class="column col-main">
+        <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-main">
           {#each mainCol as i}
             <svelte:component this={i.component}/>
           {/each}
         </div>
       {:else}
-        <div class="column col-main">
+        <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-main">
           {#each mainCol as i}
             <svelte:component this={i.component}/>
           {/each}
         </div>
-        <div class="column col-other">
+        <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-other">
           {#each otherCol as i}
             <svelte:component this={i.component}/>
           {/each}

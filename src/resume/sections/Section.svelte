@@ -1,5 +1,6 @@
 <script>
   export let header;
+  import { section_headings_font_size } from '../utils/settings.js';
 </script>
 
 <style>
@@ -17,20 +18,20 @@
     padding: 0;
     margin: 0;
     color: purple;
-    font-size: 24px;
+    /* font-size: 24px; */ /* set by store not hardcoded */
   }
 
-  div.line{
-    height: 2px;
+  hr{
+    height: 1px;
     background: black;
+    margin: 0;
     flex: 1 1; /* grow shrink basis */
   }
 </style>
 
 <div class='section-main'>
-  <h1>{header}</h1>
-  <div class="line">
-  </div>
+  <h1 style="font-size: {$section_headings_font_size}px;">{header}</h1>
+  <hr>
   <div class='section-content'>
     <slot></slot>
   </div>

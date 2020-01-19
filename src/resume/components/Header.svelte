@@ -1,14 +1,19 @@
 <script>
   import LinkRow from './LinkRow.svelte';
+
+  import {
+    top_name_font_size,
+    top_name_top_margin,
+    top_name_bottom_margin
+  } from '../utils/settings.js';
   
 </script>
 
 <style>
   h1{
-    margin: 25px 0 15px 0;
     padding: 0;
 		text-transform: uppercase;
-		font-size: 3em;
+		/* font-size: 3em; */ /* loads from store - not hardcoded */
     font-weight: 100;
     text-align: center;
   }
@@ -21,6 +26,7 @@
 </style>
 
 <div>
-  <h1>Kaelan Moffett-Steinke</h1>
+  <h1 style="font-size: {$top_name_font_size}em; margin: {$top_name_top_margin}px 0 {$top_name_bottom_margin}px 0">
+  Kaelan Moffett-Steinke</h1>
   <LinkRow/>
 </div>

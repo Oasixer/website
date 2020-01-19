@@ -2,14 +2,14 @@ import { writable } from 'svelte/store';
 
 export let TagNames = {
   FRONTEND: 'Frontend web development',
-  BACKEND: 'Backend web development',
+  BACKEND: 'Backend',
   CONTROL_SYSTEMS: 'Control systems',
   PYTHON: 'Python',
   CPP: 'C++',
   DATA_ANALYSIS: 'Data Analysis',
   NLP: 'NLP',
   ARDUINO: 'Arduino',
-  UI: 'UI',
+  UI: 'UI Design',
   MACHINE_LEARNING: 'Machine Learning',
   ROS: 'ROS',
   OPENCV: 'OpenCV',
@@ -18,9 +18,9 @@ export let TagNames = {
   FLASK: 'Flask',
   DATA_VISUALIZATION: 'Data Visualization',
   SQL: 'SQL',
-  SQLITE: 'SQLite',
+  POSTGRESQL: 'PostgreSQL',
   ORACLEDB: 'OracleDB',
-  SCSS: 'SCSS',
+  SCSS: 'SASS/SCSS',
   CSS: 'CSS',
   HTML: 'HTML',
   JS: 'Javascript',
@@ -33,8 +33,31 @@ export let TagNames = {
   NLTK: 'NLTK',
   QT: 'QT',
   PYQT: 'PyQT',
-  REACT: 'React'
+  REACT: 'ReactJS',
+  KOTLIN: 'Kotlin',
+  LATEX: 'Latex',
+  BASH: "Bash",
+  GIT: "Git",
+  AWS: "AWS",
+  DOCKER: "Docker",
+  SQLALCHEMY: "SQLAlchemy",
+  D3: "D3.js"
 }
+
+// For tags that are more categories than specific
+// which are useful for organization, but a little unnecesary to list under each position
+export let TagCategoryNames = [
+  // NLP, MACHINE_LEARNING, CONTROL_SYSTEMS could go here
+  // but I kinda like them
+  TagNames.DATA_ANALYSIS,
+  TagNames.UI,
+  TagNames.BACKEND,
+  TagNames.FRONTEND,
+  TagNames.DATA_VISUALIZATION,
+  TagNames.NLP,
+];
+
+
 
 let defaultOrders = {
   WORKEXPERIENCE: 2,
@@ -53,14 +76,31 @@ export const swap_columns = writable(false);
 export const single_column = writable(false);
 
 export const force_use_all_employment = writable(false);
+export const show_tags_under_experience = writable(true);
+export const disable_categorical_tags = writable(true);
 export const disable_coursework_skills = writable(false);
 
 export const alternate_skills_display_mode = writable(false);
+
+export const top_align_sections = writable(true);
 
 export const tags = writable(Object.values(TagNames));
 
 export const orders = writable(defaultOrders);
 
 export const display_mode = writable(false); // if true, dont show modal button
+
+export const education_awards_interests_font_size = writable("14");
+export const experience_content_font_size = writable("14");
+export const skills_headings_font_size = writable("15");
+export const skills_content_font_size = writable("15");
+export const section_headings_font_size = writable("24");
+export const top_name_font_size = writable("3");
+
+export const top_name_top_margin = writable("25");
+export const top_name_bottom_margin = writable("15");
+
+export const num_awards_to_show = writable(4);
+export const num_interests_to_show = writable(3);
 
 export const disable_settings_button = writable(false); // for printing / exporting to pdf
