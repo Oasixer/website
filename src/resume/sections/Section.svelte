@@ -1,6 +1,12 @@
 <script>
   export let header;
+  export let show_controls = false;
+  export let force_hide;
   import { section_headings_font_size } from '../utils/settings.js';
+
+  function toggle_controls(){
+    show_controls = !show_controls;
+  }
 </script>
 
 <style>
@@ -29,10 +35,13 @@
   }
 </style>
 
+{#if !force_hide}
 <div class='section-main'>
-  <h1 style="font-size: {$section_headings_font_size}px;">{header}</h1>
+  <h1 style="font-size: {$section_headings_font_size}px;"
+      on:click={toggle_controls}>{header}</h1>
   <hr>
   <div class='section-content'>
     <slot></slot>
   </div>
 </div>
+{/if}

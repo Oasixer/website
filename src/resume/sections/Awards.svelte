@@ -1,15 +1,20 @@
 <script>
   import Section from './Section.svelte';
   import PointList from '../components/PointList.svelte';
-
-  import { num_awards_to_show } from '../utils/settings.js';
+  import ListControls from '../components/ListControls.svelte';
+  import SectionControls from '../components/SectionControls.svelte';
 
   let header = 'Awards / Achievements';
-  let points = ['CIBC Employee Above & Beyond Award',
-    'UTRAHacks 2018 - 2nd place',
-    'University Bouldering Series 2018 - 2nd place',
-    '2017 Youth Climbing Nationals - 7th place'
+  let items = [
+    {title: 'CIBC Employee Above & Beyond Award', order: 0, force_hide: false},
+    {title: 'UTRAHacks 2018 - 2nd place', order: 0, force_hide: false},
+    {title: 'University Bouldering Series 2018 - 2nd place', order: 0, force_hide: false},
+    {title: '2017 Youth Climbing Nationals - 7th place', order: 0, force_hide: false}
   ];
+
+  let show_controls = false;
+  let force_hide = false;
+  
 </script>
 
 <style>
@@ -18,6 +23,10 @@
   }
 </style>
 
-<Section {header}>
-  <PointList points={points.slice(0, Number($num_awards_to_show))}/>
+<Section {header} {force_hide} bind:show_controls>
+  {#if show_controls}
+    <SectionControls bind:force_hide/>
+    <ListControls bind:items/>
+  {/if}
+  <PointList bind:items bind:show_controls/>
 </Section>

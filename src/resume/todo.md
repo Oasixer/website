@@ -13,17 +13,6 @@
 * Education isnt showing for some reason?
 
 
-
-
-
-
-
-
-
-
-
-
-
 # My questions
 * The whole thing, when exported, is currently too long. Suggestions about decrease font VS decrease spacing VS decrease content?
     * Add fontsize and spacing stuff to the settings

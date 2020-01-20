@@ -1,20 +1,19 @@
 <script>
   import Section from './Section.svelte';
   import PointList from '../components/PointList.svelte';
-
-  import 
-  {
-    num_interests_to_show
-  } from '../utils/settings.js';
-
+  import ListControls from '../components/ListControls.svelte';
+  import SectionControls from '../components/SectionControls.svelte';
 
   let header = 'Interests';
-  let points = [
-    'Competitive rock climber for 12 yrs',
-    'National Youth Circus alumni',
-    'Machining, woodworking',
-    'Rock climbing coach during high school'
+  let items = [
+    {title: 'Competitive rock climber for 12 yrs', order: 0, force_hide: false},
+    {title: 'National Youth Circus alumni', order: 0, force_hide: false},
+    {title: 'Machining, woodworking', order: 0, force_hide: false},
+    {title: 'Rock climbing coach during high school', order: 0, force_hide: false},
   ];
+
+  let show_controls = false;
+  let force_hide = false;
 </script>
 
 <style>
@@ -23,6 +22,10 @@
   }
 </style>
 
-<Section {header}>
-  <PointList points={points.slice(Number(0, $num_interests_to_show))}/>
+<Section {header} bind:show_controls {force_hide}>
+  {#if show_controls}
+    <SectionControls bind:force_hide/>
+    <ListControls bind:items/>
+  {/if}
+  <PointList bind:items bind:show_controls/>
 </Section>

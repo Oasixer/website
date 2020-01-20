@@ -43,7 +43,7 @@
 <div id="link-row">
   <a href='http://github.com/oasixer'>
     <p style="margin-right: 4px;"><Icon icon={faGithub}/></p>
-    <p>github/oasixer</p>
+    <p>github.com/oasixer</p>
   </a>
   <div class="v-line"></div>
   <a>
@@ -53,11 +53,11 @@
   <div class="v-line"></div>
   <a href="mailto:ksmoffet@edu.uwaterloo.ca">
     <p style="margin-right: 4px;"><Icon icon={faEnvelopeSquare}/></p>
-    <p>ksmoffet@edu.uwaterloo.ca</p>
+    <p>ksmoffet@uwaterloo.ca</p>
   </a>
   <div class="v-line"></div>
   <a href="https://www.linkedin.com/in/kaelanms/">
     <p style="margin-right: 4px;"><Icon icon={faLinkedin}/></p>
-    <p>linkedin/kaelanms/</p>
+    <p>linkedin.com/kaelanms/</p>
   </a>
 </div>

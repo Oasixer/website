@@ -23,12 +23,12 @@
     top_name_top_margin,
     top_name_bottom_margin,
     top_name_font_size,
-    num_awards_to_show,
-    num_interests_to_show,
+    force_display_skills_ignore_tags,
+    auto_populate_orders,
     TagNames
   } from '../utils/settings.js';
 
-  import { sleep } from '../utils/misc.js';
+  import { sleep, getStoreValue } from '../utils/misc.js';
 
   export let modal;
 
@@ -72,12 +72,20 @@
       store: force_use_all_employment
     },
     {
+      name: 'Force displaying every skills category regardless of tags',
+      store: force_display_skills_ignore_tags
+    },
+    {
       name: 'Disable interests section',
       store: disable_interests_section
     },
     {
       name: 'Disable coursework in the skills section',
       store: disable_coursework_skills
+    },
+    {
+      name: 'Auto populate orders',
+      store: auto_populate_orders
     }
   ].sort((a,b)=>a.name<b.name?-1:1);
 
@@ -115,12 +123,8 @@
       store: top_name_bottom_margin
     },
     {
-      name: 'Number of awards to show (top n)',
-      store: num_awards_to_show
-    },
-    {
-      name: 'Number of interets to show (top n)',
-      store: num_interests_to_show
+      name: 'Auto populate orders',
+      store: auto_populate_orders
     }
   ].sort((a,b)=>a.name<b.name?-1:1);
 
@@ -133,13 +137,6 @@
     i.store.update((cur) =>{return !cur});
   }
 
-  function getStoreValue(i){
-    let val;
-    // super janky function that uses the store updater to check the value
-    // Because I can't get the normal syntax {$i.store} to work here for some reason
-    i.store.update((cur) =>{val=cur; return cur});
-    return val;
-  }
 
   function toggleTag(tag){
     tags.update(i => {

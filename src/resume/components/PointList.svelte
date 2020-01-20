@@ -1,6 +1,12 @@
 <script>
-  export let points;
+  export let items;
   import { education_awards_interests_font_size } from '../utils/settings.js';
+
+  export let show_controls = false;
+
+  function toggle_controls(){
+     show_controls = !show_controls;
+  }
 </script>
 
 <style>
@@ -10,12 +16,10 @@
 
 </style>
 
-<!--  <Section>  -->
-  <ul>
-  {#each points as p}
-    <li style="font-size: {$education_awards_interests_font_size}px;">
-      {p}
-    </li>
-  {/each}
-  </ul>
-  <!--  </Section>  -->
+<ul on:click={toggle_controls}>
+  {#each items.concat().sort((a,b)=>a.order - b.order) as i}
+  <li style="font-size: {$education_awards_interests_font_size}px;">
+    {i.title}
+  </li>
+{/each}
+</ul>

@@ -41,7 +41,9 @@ export let TagNames = {
   AWS: "AWS",
   DOCKER: "Docker",
   SQLALCHEMY: "SQLAlchemy",
-  D3: "D3.js"
+  D3: "D3.js",
+  DYNAMODB: 'Amazon DynamoDB',
+  JQUERY: 'JQuery'
 }
 
 // For tags that are more categories than specific
@@ -75,10 +77,11 @@ export const show_project_dates = writable(false);
 export const swap_columns = writable(false);
 export const single_column = writable(false);
 
-export const force_use_all_employment = writable(false);
+export const auto_populate_orders = writable(true);
+export const force_use_all_employment = writable(true);
 export const show_tags_under_experience = writable(true);
 export const disable_categorical_tags = writable(true);
-export const disable_coursework_skills = writable(false);
+export const disable_coursework_skills = writable(true);
 
 export const alternate_skills_display_mode = writable(false);
 
@@ -95,12 +98,11 @@ export const experience_content_font_size = writable("14");
 export const skills_headings_font_size = writable("15");
 export const skills_content_font_size = writable("15");
 export const section_headings_font_size = writable("24");
-export const top_name_font_size = writable("3");
+export const top_name_font_size = writable("2.8");
+
+export const force_display_skills_ignore_tags = writable(false);
 
 export const top_name_top_margin = writable("25");
-export const top_name_bottom_margin = writable("15");
-
-export const num_awards_to_show = writable(4);
-export const num_interests_to_show = writable(3);
+export const top_name_bottom_margin = writable("10");
 
 export const disable_settings_button = writable(false); // for printing / exporting to pdf
