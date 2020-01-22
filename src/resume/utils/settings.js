@@ -28,7 +28,7 @@ export let TagNames = {
   SELENIUM: 'Selenium',
   PANDAS: 'Pandas',
   MATPLOTLIB: 'Matplotlib',
-  PLOTLY: 'Plotly',
+  PLOTLY: 'Plotly Dash',
   TABLEAU: 'Tableau',
   NLTK: 'NLTK',
   QT: 'QT',
@@ -39,6 +39,7 @@ export let TagNames = {
   BASH: "Bash",
   GIT: "Git",
   AWS: "AWS",
+  C: "C",
   DOCKER: "Docker",
   SQLALCHEMY: "SQLAlchemy",
   D3: "D3.js",
@@ -60,7 +61,6 @@ export let TagCategoryNames = [
 ];
 
 
-
 let defaultOrders = {
   WORKEXPERIENCE: 2,
   SIDEPROJECTS: 4,
@@ -69,6 +69,7 @@ let defaultOrders = {
   AWARDS: 10,
   INTERESTS: 12
 }
+
 export const disable_interests_section = writable(false);
 export const show_project_locations = writable(true);
 export const show_project_positions = writable(false);
@@ -81,7 +82,6 @@ export const auto_populate_orders = writable(true);
 export const force_use_all_employment = writable(true);
 export const show_tags_under_experience = writable(true);
 export const disable_categorical_tags = writable(true);
-export const disable_coursework_skills = writable(true);
 
 export const alternate_skills_display_mode = writable(false);
 
@@ -97,12 +97,12 @@ export const education_awards_interests_font_size = writable("14");
 export const experience_content_font_size = writable("14");
 export const skills_headings_font_size = writable("15");
 export const skills_content_font_size = writable("15");
-export const section_headings_font_size = writable("24");
-export const top_name_font_size = writable("2.8");
+export const section_headings_font_size = writable("25");
+export const top_name_font_size = writable("2.6");
 
 export const force_display_skills_ignore_tags = writable(false);
 
-export const top_name_top_margin = writable("25");
+export const top_name_top_margin = writable("20");
 export const top_name_bottom_margin = writable("10");
 
 export const disable_settings_button = writable(false); // for printing / exporting to pdf

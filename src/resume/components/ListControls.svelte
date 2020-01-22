@@ -1,27 +1,43 @@
 <script>
   export let items;
   export let single=false;
+  export let title=undefined;
   import { auto_populate_orders } from '../utils/settings.js';
-  import {onMount} from 'svelte';
+  import {onMount} from 'svelte'; 
 
-  let populated = false;
+  function refresh(){
+    items = [...items];
+  }
 
   function populate(){
+    if (single == true){
+      console.log('single');
+      for(let i=0; i<items.length; i++){
+        console.log(items[i].order);
+      }
 
-    console.log(items);
-    for(let i=0; i<items.length; i++){
-      items[i].order=i;
+      return;
     }
-    populated=true;
-    console.log('populating');
-    console.log(items);
+    console.log('not single');
+    if (items.populated == true){
+      console.log('already popped');
+      return;
+    }
+    console.log('not already popped')
+    for(let i=0; i<items.length; i++){
+      items[i].order=2*i+1;
+    }
+    items.populated=true;
   }
 
   $: if($auto_populate_orders){
-    populate()
-  };
+    populate();
+  }
 
   onMount(async => {
+    if(single == true){
+      return;
+    }
     if ($auto_populate_orders){
       populate();
     }
@@ -128,7 +144,9 @@
 </style>
 
 <div class="list-controls-outer">
-  <h4>List Controls</h4>
+  {#if single != true || title != undefined}
+    <h4>{title ? title : 'List Controls'}</h4>
+  {/if}
   {#each items as item}
     <div class="individual">
       {#if single != true}

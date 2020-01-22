@@ -2,7 +2,6 @@
   export let item;
   export let work;
 
-  import TagControls from './TagControls.svelte';
   import ListControls from './ListControls.svelte';
 
   import { 
@@ -28,17 +27,11 @@
     enable_section_controls = !enable_section_controls;
   }
   
-  $: if ($auto_populate_orders){
-    populate_orders();
-  }
-
-  function populate_orders(){
-    for (let i=0; i<item.tags.length; i++){
-      item.tags[i].order = i;
-    }
-  }
-
-  $: tags_text = item.tags.sort((a,b)=>a.order - b.order).filter(i=>!((TagCategoryNames.includes(i) && $disable_categorical_tags) ) && i.display).map(i=>i.name).join(', ');
+  $: tags_text = item.tags.concat().sort((a,b)=>a.order - b.order).filter(i=>{
+    let disabled_because_cat = (TagCategoryNames.includes(i.title) && $disable_categorical_tags);
+    let test = !(disabled_because_cat || i.force_hide);
+    return test;
+    }).map(i=>i.title).join(', ');
 
 </script>
 
@@ -113,7 +106,7 @@
   </div>
 
   {#if enable_section_controls}
-    <ListControls bind:items={itemContainer}/>
+    <ListControls title='Experience Item Controls' single={true} bind:items={itemContainer}/>
   {/if}
 
   <div class="row">
@@ -135,7 +128,7 @@
   {#if $show_tags_under_experience}
     <p class="experience-tags" on:click={toggle_tag_controls}>{tags_text}</p>
     {#if enable_tag_controls}
-      <TagControls bind:item/>
+      <ListControls bind:items={item.tags}/>
     {/if}
   {/if}
 </div>

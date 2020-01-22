@@ -6,7 +6,7 @@
 
   let header = 'Interests';
   let items = [
-    {title: 'Competitive rock climber for 12 yrs', order: 0, force_hide: false},
+    {title: 'Competitive rock climber for 12 years', order: 0, force_hide: false},
     {title: 'National Youth Circus alumni', order: 0, force_hide: false},
     {title: 'Machining, woodworking', order: 0, force_hide: false},
     {title: 'Rock climbing coach during high school', order: 0, force_hide: false},

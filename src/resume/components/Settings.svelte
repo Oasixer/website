@@ -4,7 +4,6 @@
     show_project_locations,
     show_project_positions,
     show_project_dates,
-    disable_coursework_skills,
     force_use_all_employment,
     swap_columns,
     single_column,
@@ -80,10 +79,6 @@
       store: disable_interests_section
     },
     {
-      name: 'Disable coursework in the skills section',
-      store: disable_coursework_skills
-    },
-    {
       name: 'Auto populate orders',
       store: auto_populate_orders
     }
@@ -108,7 +103,7 @@
     },
     {
       name: 'Section headings font size',
-      store: skills_headings_font_size
+      store: section_headings_font_size
     },
     {
       name: 'Top name font size (in em)',
