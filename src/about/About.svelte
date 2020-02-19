@@ -1,5 +1,5 @@
 <script>
-  export let height;
+  export let height=undefined;
 </script>
 
 <style>

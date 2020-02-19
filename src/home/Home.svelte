@@ -1,6 +1,11 @@
 <script>
   export let height;
   import Menubar from '../menubar/Menubar.svelte';
+  export let curSection;
+  export let sections;
+
+  import { onMount, createEventDispatcher } from 'svelte';
+
 </script>
 
 <style>
@@ -16,7 +21,6 @@
 </style>
 
 <div id='home' bind:clientHeight={height}>
-  <Menubar/>
   <h1>home</h1>
   <p>hi</p>
 </div>

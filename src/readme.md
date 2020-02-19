@@ -6,6 +6,7 @@ $offwhite: #f3f5f4;
 $fontsize-sectionheader: 19px;
 $fontsize-plottitle: 13px;
 $lightgrey: #b2b2b2;
+$mediumgrey: #30333d;
 
 
 Home--------------------------------------------------------------------------------
