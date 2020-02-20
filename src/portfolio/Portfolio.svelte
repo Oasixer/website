@@ -1,21 +1,32 @@
 <script>
   export let height;
+
+  let src_plotly = '../assets/images/climb.jpg';
+  let src_frc = '../assets/images/frc.jpg';
+  let src_windsurf = '../assets/images/windsurf.jpg';
 </script>
 
 <style>
   div#portfolio{
     width: 100%;
-    height: 100vh;
-    /* background-color: #161a28; */
-    background-color: blue;
+    background-color: #202030;
+    padding: 70px;
+    display: flex;
+    flex-flow: column nowrap;
   }
 
   h1{
-    margin:0;
+    font-size: 70px;
+    text-transform: uppercase;
+    color: #f3f5f4;
+    font-weight: 100;
+    font-family: "DIN Condensed Web";
+    margin-bottom: 25px;
   }
 </style>
 
 <div id='portfolio' bind:clientHeight={height}>
   <h1>Portfolio</h1>
-  <p>hi</p>
+  <div id='portfolio-inner'>
+  </div>
 </div>
