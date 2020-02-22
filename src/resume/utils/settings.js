@@ -105,4 +105,4 @@ export const force_display_skills_ignore_tags = writable(false);
 export const top_name_top_margin = writable("20");
 export const top_name_bottom_margin = writable("10");
 
-export const disable_settings_button = writable(false); // for printing / exporting to pdf
+export const disable_settings_button = writable(true); // for printing / exporting to pdf

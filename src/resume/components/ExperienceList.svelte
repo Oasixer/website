@@ -4,12 +4,13 @@
   import { tags, force_use_all_employment } from '../utils/settings.js';
   export let items;
   export let work;
+  export let embedded=false;
 
 </script>
 
 <style>
   div.experience-list-container{
-    margin: 0 0 -15px 0;
+    margin: 0 0 -15px 10px;
     padding: 0;
   }
 
@@ -17,8 +18,8 @@
 
 <div class="experience-list-container">
   {#each items.concat().sort((a,b)=>a.order - b.order) as item}
-    {#if (arrayIntersect(item.tags.filter(i => i.use_index).map(i=>i.title), $tags).length > 0 || (work && $force_use_all_employment) && !item.force_hide)}
-      <ExperienceItem bind:item {work}/>
+    {#if (embedded || (arrayIntersect(item.tags.filter(i => i.use_index).map(i=>i.title), $tags).length > 0 || (work && $force_use_all_employment) && !item.force_hide))}
+      <ExperienceItem bind:item {embedded} {work}/>
     {/if}
   {/each}
 </div>

@@ -83,13 +83,14 @@
     padding: 0;
     display: flex;
     flex-flow: column nowrap;
+    overflow: hidden;
   }
 
   div.main-container{
     display: flex;
     flex-flow: row nowrap;
-    margin:0;
-    padding: 0 -13px;
+    margin: 0;
+    padding: 0;
   }
 
   div.column {
@@ -109,7 +110,7 @@
   }
 
   button#modal-button{
-    position: absolute;
+    position: fixed;
     top:0;
     left:0;
     z-index: 15;

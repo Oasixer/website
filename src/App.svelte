@@ -1,10 +1,13 @@
 <script>
   import Resume from './resume/Resume.svelte';
+  import ResumePage from './resume/ResumePage.svelte';
   import Home from './home/Home.svelte';
   import About from './about/About.svelte';
   import Portfolio from './portfolio/Portfolio.svelte';
   import Contact from './contact/Contact.svelte';
   import Menubar from './menubar/Menubar.svelte';
+  import WorkExperiencePage from './resume/WorkExperiencePage.svelte';
+  import SkillsPage from './resume/SkillsPage.svelte';
 
   import { onMount } from 'svelte';
 
@@ -18,7 +21,9 @@
     {height: undefined, component: Home, name:'Home'},
     {height: undefined, component: About, name:'About'},
     {height: undefined, component: Portfolio, name:'Portfolio'},
-    {height: undefined, component: Resume, name:'Resume'},
+    {height: undefined, component: WorkExperiencePage, name:'Work Experience'},
+    {height: undefined, component: SkillsPage, name:'Skills'},
+    {height: undefined, component: ResumePage, name:'Resume'},
     {height: undefined, component: Contact, name:'Contact'}
   ];
 

@@ -10,13 +10,13 @@
   import { arrayIntersect } from '../utils/misc.js';
   import {onMount} from 'svelte';
   import {sleep} from '../utils/misc.js';
-
+  
+  export let embedded=false;
   let header = 'Skills';
   let show_controls = false;
   let force_hide = false;
 
-  $: if ($auto_populate_orders){
-    console.log('pop');
+  $: if ($auto_populate_orders || embedded){
     populate_orders();
   }
 
@@ -124,13 +124,15 @@
   ];
 
   function toggle_tags_controls(i){
+    if (embedded){
+      return;
+    }
     i.show_tag_controls = !i.show_tag_controls;
     refresh_tags();
   }
   
   function toggle_force_hide(i){
     i.force_hide = !i.force_hide;
-    /* refresh_tags(); */
   }
 
   $: refresh_tags({$tags});
@@ -144,6 +146,10 @@
     // Returns boolean depending on whether this point list should be displayed.
     // which depends on if the tags are relevant to the loaded tags, and any other overriding settings like
     // disable_coursework_skills
+    
+    if (embedded){
+      return true;
+    }
 
     if (pointList.force_hide){
       return false;
@@ -194,8 +200,7 @@
     user-select: none;
   }
 
-  /* Hide the browser's default checkbox */
-  .container input {
+  /* Hide the browser's default checkbox */ .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -274,21 +279,31 @@
     font: 900 roboto, sans-serif; /* 15px font size, set by store instead of hardcoded */
   }
 
+  h1.skills-section-title.darktheme{
+    color: #0078b4;
+    font-size: 20px;
+  }
+
   p{
     margin: 0;
     font-weight: 200;
     /*font-size: 15px;*/ /* 15px set by store instead of hardcoded */
   }
+  p.darktheme{
+    color: #a3a4a5;
+    font-size: 18px;
+  }
 </style>
 
-<Section {header} bind:show_controls {force_hide}>
+<Section {header} {embedded} bind:show_controls {force_hide}>
   {#if show_controls}
     <SectionControls bind:force_hide/>
     <ListControls bind:items/>
   {/if}
   {#each items.concat().sort((a, b) => a.order - b.order) as item, n}
     {#if should_display_pointlist(item, $tags)}
-      <h1 class="skills-section-title" style="font-size: {$skills_headings_font_size}px;"
+      <h1 class="skills-section-title" class:darktheme={embedded}
+      style="{(!embedded)?('font-size: '+$skills_headings_font_size+'px;'):''}"
          on:click={()=>{item.show_controls = !item.show_controls}}>
           {item.title}
       </h1>
@@ -297,7 +312,10 @@
       {/if}
         <p 
         on:click={()=>{toggle_tags_controls(item)}}
-        style="margin-bottom: {n == items.length -1 ? '0' : '15px'}; font-size: {$skills_content_font_size}px;">
+        class:darktheme={embedded}
+        style=
+          "{'margin-bottom: '+((n == items.length -1) ? '0' : '15px')+';'+
+          ((!embedded)?('font-size: '+$skills_content_font_size+'px;'):'')}">
         {item.tags.filter(i => !i.force_hide).sort(tag_sort).sort(order_sort).map(i => i.title).join(', ')}
       </p>
       {#if item.show_tag_controls}

@@ -1,6 +1,7 @@
 <script>
   export let item;
   export let work;
+  export let embedded=false;
 
   import ListControls from './ListControls.svelte';
 
@@ -21,9 +22,15 @@
   let itemContainer = [item]; // for 2way binding in single subsection controls
 
   function toggle_tag_controls(){
+    if (embedded){
+      return;
+    }
     enable_tag_controls = !enable_tag_controls;
   }
   function toggle_secton_controls(){
+    if (embedded){
+      return;
+    }
     enable_section_controls = !enable_section_controls;
   }
   
@@ -47,6 +54,11 @@
     margin: 5px 0;
   }
 
+  p.experience-tags.darktheme{
+    color: #808080;
+    font-size: 17px;
+  }
+
   div.row{
     display: flex;
     flex-flow: row-nowrap;
@@ -60,6 +72,11 @@
     font: 900 15px roboto, sans-serif;
   }
 
+  .title.darktheme{
+    color: #0078b4;
+    font-size: 32px;
+  }
+
   .location{
     margin: 0;
     margin-left: auto;
@@ -69,12 +86,21 @@
     font-style: italic;
   }
 
+  .location.darktheme{
+    font-size: 18px;
+    color: #0078b4;
+  }
+
   .position{
     margin: 0;
-    color: grey;
+    color: #808080;
     font: 11px roboto, sans-serif;
     text-transform: uppercase;
     /* font-variant: small-caps; */
+  }
+
+  .position.darktheme{
+    font-size: 17px;
   }
 
   .date{
@@ -86,6 +112,10 @@
     font-style: italic;
   }
 
+  .date.darktheme{
+    font-size: 17px;
+  }
+
   ul{
     margin: 0 0;
   }
@@ -93,15 +123,20 @@
   li{
     margin: 0px 0px;
   }
+  
+  li.darktheme{
+    color: #c0c0c0;
+    font-size: 18px;
+  }
 
 </style>
 
 {#if !item.force_hide}
 <div class="experience-item-main">
   <div class="row">
-    <h1 class="title" on:click={toggle_secton_controls}>{item.title}</h1>
+    <h1 class='title' class:darktheme={embedded} on:click={toggle_secton_controls}>{item.title}</h1>
     {#if (work || $show_project_locations) && (item.location != undefined)}
-      <h1 class="location">{item.location}</h1>
+      <h1 class="location" class:darktheme={embedded}>{item.location}</h1>
     {/if}
   </div>
 
@@ -111,22 +146,22 @@
 
   <div class="row">
     {#if (work || $show_project_positions) && (item.position != undefined)}
-      <h1 class="position">{item.position}</h1>
+      <h1 class="position" class:darktheme={embedded}>{item.position}</h1>
     {/if}
     {#if (work || $show_project_dates) && (item.date != undefined)}
-      <h1 class="date">{item.date}</h1>
+      <h1 class="date" class:darktheme={embedded}>{item.date}</h1>
     {/if}
   </div>
 
   <ul>
   {#each item.points as p}
-    <li style="font-size: {$experience_content_font_size}px;">
+    <li class:darktheme={embedded} style="{(!embedded)?('font-size: '+$experience_content_font_size+'px'):''}">
       {p}
     </li>
   {/each}
   </ul>
   {#if $show_tags_under_experience}
-    <p class="experience-tags" on:click={toggle_tag_controls}>{tags_text}</p>
+    <p class="experience-tags" class:darktheme={embedded} on:click={toggle_tag_controls}>{tags_text}</p>
     {#if enable_tag_controls}
       <ListControls bind:items={item.tags}/>
     {/if}

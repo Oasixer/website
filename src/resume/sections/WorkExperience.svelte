@@ -6,11 +6,12 @@
   import { TagNames, auto_populate_orders } from '../utils/settings.js';
 
   let header = 'Work Experience';
+  export let embedded=false;
 
   let force_hide = false;
   let show_controls = false;
 
-  $: if ($auto_populate_orders){
+  $: if ($auto_populate_orders || embedded){
     populate_orders();
   }
 
@@ -65,10 +66,10 @@
 
 </script>
 
-    <Section {header} {force_hide} bind:show_controls>
+<Section {header} {embedded} {force_hide} bind:show_controls>
   {#if show_controls}
     <SectionControls bind:force_hide/>
     <ListControls bind:items/>
   {/if}
-  <ExperienceList bind:items work={true}/>
+  <ExperienceList bind:items {embedded} work={true}/>
 </Section>

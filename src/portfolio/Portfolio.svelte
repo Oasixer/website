@@ -139,7 +139,7 @@
     transform: scale(1.1);
   }
 
-  img{
+  img.thumb{
     width: 100%;
     object-fit: cover;
     /* contain: The image keeps its original aspect ratio, but resized so that the longest of either the height or width can fit in the given dimensions.
@@ -184,6 +184,13 @@ scale-down: The smaller of either contain or none. */
     letter-spacing: 0.84px;
     font-size: 15px;
     margin-top: 12px;
+  }
+
+  img.full{
+    object-fit: contain;
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-height: auto;
   }
 
   /* not mobile */
@@ -260,6 +267,15 @@ scale-down: The smaller of either contain or none. */
     <ClickOutside on:clickoutside={closeDisplay} exclude={[]}>
       <div class='displayItem displayMain'>
         <h3 class='displayHeader'>{items[displayedItem].title}</h3>
+        <!--  <div class='full-img-container'>  -->
+          <img
+            class='full'
+            id={'full-'+items[displayedItem].img.slice(0,items[displayedItem].img.length-4)}
+            src={base + items[displayedItem].img}
+            on:click={()=>{updateDisplayedItem(items[displayedItem].numFromTotal)}}/>
+            <!--  </div>  -->
+          <p>{items[displayedItem].text}</p>
+
       </div>
     </ClickOutside>
 
