@@ -10,7 +10,6 @@
 
   $: sectionsLeft = sections.slice(0,2).filter(i=>!i.excludeFromMenubar);
   $: sectionsRight = sections.slice(2).filter(i=>!i.excludeFromMenubar);
-  /* $: console.log('cur: '+curSection); */
 
   function runMoveDispatcher(n){
     dispatcher({n:n});
@@ -92,7 +91,7 @@
   }
 </style>
 
-<div class='menubar' class:floaty transition:fly="{floaty?{y:-100, duration: 200}:none}">
+<div class='menubar' class:floaty transition:fly="{floaty?{y:-100, duration: 200}:''}">
   <div class='group left' class:floaty>
     {#each sectionsLeft as section, n}
       <button
