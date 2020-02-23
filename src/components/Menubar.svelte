@@ -8,8 +8,8 @@
   const dispatch = createEventDispatcher();
   const dispatcher = (args) => dispatch('move', {args:args});
 
-  $: sectionsLeft = sections.slice(0,2);
-  $: sectionsRight = sections.slice(2);
+  $: sectionsLeft = sections.slice(0,2).filter(i=>!i.excludeFromMenubar);
+  $: sectionsRight = sections.slice(2).filter(i=>!i.excludeFromMenubar);
   /* $: console.log('cur: '+curSection); */
 
   function runMoveDispatcher(n){
