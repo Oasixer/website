@@ -1,5 +1,6 @@
 <script>
-  export let height;
+  export let height=undefined;
+  export let bg_color; // unused bc we use a seperate color for home
 
   import { onMount, createEventDispatcher } from 'svelte';
 

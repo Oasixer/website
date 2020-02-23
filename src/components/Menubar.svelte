@@ -10,15 +10,15 @@
 
   $: sectionsLeft = sections.slice(0,2);
   $: sectionsRight = sections.slice(2);
-  $: console.log('cur: '+curSection);
+  /* $: console.log('cur: '+curSection); */
 
   function runMoveDispatcher(n){
     dispatcher({n:n});
-    console.log('move-base');
+    /* console.log('move-base'); */
   }
 
   onMount(() => {
-    console.log('floaty: '+floaty);
+    /* console.log('floaty: '+floaty); */
   });
   
 </script>

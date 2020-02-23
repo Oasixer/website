@@ -5,9 +5,10 @@
   import About from './about/About.svelte';
   import Portfolio from './portfolio/Portfolio.svelte';
   import Contact from './contact/Contact.svelte';
-  import Menubar from './menubar/Menubar.svelte';
+  import Menubar from './components/Menubar.svelte';
   import WorkExperiencePage from './resume/WorkExperiencePage.svelte';
   import SkillsPage from './resume/SkillsPage.svelte';
+  import BackToTop from './components/BackToTop.svelte';
 
   import { onMount } from 'svelte';
 
@@ -17,20 +18,21 @@
   $: curSection = getCurrentSection(y);
 
   let sections = [
-    {height: undefined, component: Home, name:'Home'},
-    {height: undefined, component: About, name:'About'},
-    {height: undefined, component: WorkExperiencePage, name:'Work Experience'},
-    {height: undefined, component: SkillsPage, name:'Skills'},
-    {height: undefined, component: Portfolio, name:'Portfolio'},
-    {height: undefined, component: ResumePage, name:'Resume'},
-    {height: undefined, component: Contact, name:'Contact'}
+    {component: Home, name:'Home', excludeFromMenubar: false},
+    {component: About, name:'About', excludeFromMenubar: false},
+    {component: WorkExperiencePage, name:'Work Experience', excludeFromMenubar: false},
+    {component: SkillsPage, name:'Skills', excludeFromMenubar: false},
+    {component: Portfolio, name:'Portfolio', excludeFromMenubar: false},
+    {component: ResumePage, name:'Resume', excludeFromMenubar: false},
+    {component: Contact, name:'Contact', excludeFromMenubar: false},
+    {component: BackToTop, excludeFromMenubar: true}
   ];
 
   function move(event){
-    console.log('move-app');
-    console.log(event);
+    /* console.log('move-app'); */
+    /* console.log(event); */
     let n=event.detail.args.n;
-    console.log(n);
+    /* console.log(n); */
     let y_temp=0;
     for(let i=0; i<n; i++){
       y_temp += sections[i].height;
@@ -52,7 +54,7 @@
   }
 
   const getColor = (section, n) =>{
-    console.log('hi');
+    /* console.log('hi'); */
     return n % 2 ? '#202020' : '#161a28';
   }
 </script>

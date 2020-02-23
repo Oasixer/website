@@ -3,7 +3,7 @@
   import ClickOutside from 'svelte-click-outside';
 
   export let bg_color;
-  export let height;
+  export let height=undefined;
 
   let base = './images/portfolio/';
 

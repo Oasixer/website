@@ -139,7 +139,7 @@
 
   function refresh_tags(){
     items = [...items];
-    console.log('refreshing skills items');
+    /* console.log('refreshing skills items'); */
   }
 
   function should_display_pointlist(pointList){
