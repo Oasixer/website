@@ -15,7 +15,6 @@
   let curSection=0;
 
   $: curSection = getCurrentSection(y);
-  /* $: console.log(curSection); */
 
   let sections = [
     {height: undefined, component: Home, name:'Home'},
@@ -43,7 +42,7 @@
     let y_temp = y;
     for (let n=0;n<sections.length; n++){
       let i=sections[n];
-      if (y_temp < i.height){
+      if (y_temp < i.height - 40){
         return n;
       }
       else{

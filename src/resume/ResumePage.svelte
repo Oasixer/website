@@ -1,6 +1,8 @@
 <script>
   export let bg_color;
   export let height=undefined;
+  import Icon from 'fa-svelte';
+  import { faFileDownload } from '@fortawesome/free-solid-svg-icons/faFileDownload';
   
   /* let src_uw = './images/uw.png'; */
 </script>
@@ -40,9 +42,24 @@
     padding: 20px;
   }
 
-  #download{
-    margin-right: 400px;
-    font-size: 20px;
+  div.row{
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  a{
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 30px;
+  }
+
+  p.iconContainer{
+    margin-right: 15px;
+    font-size: 30px;
+  }
+
+  a:hover{
+    text-decoration: none;
   }
 
 </style>
@@ -52,7 +69,8 @@
      bind:clientHeight={height}>
   <h1>Resume</h1>
   <div class='row'>
-    <button id='download'>Download (TODO Icon)</button>
-    <!--  <button>View</button>  -->
+    <a href='./Kaelan_Resume_2020.pdf' download>
+    <p class="iconContainer"><Icon icon={faFileDownload}/></p>
+    <p>Download</p>
   </div>
 </div>

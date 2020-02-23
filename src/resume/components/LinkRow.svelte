@@ -19,6 +19,7 @@
   }
   div#link-row.darktheme{
     flex-flow: column nowrap;
+    align-items: center;
   } 
 
   * {
@@ -35,6 +36,7 @@
   }
   a.darktheme, a.darktheme > *{
     font-size: 17px;
+    margin-bottom: 15px;
   }
 
   a{
@@ -44,32 +46,38 @@
   }
 
   a.darktheme{
-    color: #a1a2a3;
+    color: #f3f5f4;
   }
 
   p{
     margin: 0;
   }
+  p.iconContainerP{
+    margin-right: 4px;
+  }
+  p.iconContainerP.darktheme{
+    margin-right: 15px;
+  }
 </style>
 
 <div id="link-row" class:darktheme={embedded}>
   <a class:darktheme={embedded} href='http://github.com/oasixer'>
-    <p style="margin-right: 4px;"><Icon icon={faGithub}/></p>
+    <p class="iconContainerP" class:darktheme={embedded}><Icon icon={faGithub}/></p>
     <p>github.com/oasixer</p>
   </a>
   <div class="v-line"></div>
   <a class:darktheme={embedded} >
-    <p style="margin-right: 4px;"><Icon icon={faPhone}/></p>
+    <p class="iconContainerP" class:darktheme={embedded}><Icon icon={faPhone}/></p>
     <p>647-997-6743</p>
   </a>
   <div class="v-line"></div>
   <a class:darktheme={embedded} href="mailto:ksmoffet@edu.uwaterloo.ca">
-    <p style="margin-right: 4px;"><Icon icon={faEnvelopeSquare}/></p>
+    <p class="iconContainerP" class:darktheme={embedded}><Icon icon={faEnvelopeSquare}/></p>
     <p>ksmoffet@uwaterloo.ca</p>
   </a>
   <div class="v-line"></div>
   <a class:darktheme={embedded} href="https://www.linkedin.com/in/kaelanms/">
-    <p style="margin-right: 4px;"><Icon icon={faLinkedin}/></p>
+    <p class="iconContainerP" class:darktheme={embedded}><Icon icon={faLinkedin}/></p>
     <p>linkedin.com/kaelanms/</p>
   </a>
 </div>
