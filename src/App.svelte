@@ -20,9 +20,9 @@
   let sections = [
     {height: undefined, component: Home, name:'Home'},
     {height: undefined, component: About, name:'About'},
-    {height: undefined, component: Portfolio, name:'Portfolio'},
     {height: undefined, component: WorkExperiencePage, name:'Work Experience'},
     {height: undefined, component: SkillsPage, name:'Skills'},
+    {height: undefined, component: Portfolio, name:'Portfolio'},
     {height: undefined, component: ResumePage, name:'Resume'},
     {height: undefined, component: Contact, name:'Contact'}
   ];
@@ -50,6 +50,11 @@
         y_temp -= i.height;
       }
     } 
+  }
+
+  const getColor = (section, n) =>{
+    console.log('hi');
+    return n % 2 ? '#202020' : '#161a28';
   }
 </script>
 
@@ -81,6 +86,6 @@
   <Menubar floaty={true} {sections} {curSection} on:move={move}/>
 {/if}
 
-{#each sections as section}
-  <svelte:component this={section.component} bind:height={section.height} {sections} on:move={move}/>
+{#each sections as section, n}
+  <svelte:component this={section.component} bind:height={section.height} bg_color={getColor(section, n)} on:move={move}/>
 {/each}

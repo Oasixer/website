@@ -2,6 +2,7 @@
   export let height=undefined;
   
   let src_uw = './images/uw.png';
+  export let bg_color;
 </script>
 
 <style>
@@ -16,7 +17,6 @@
   }
   div#about{
     width: 100%;
-    background-color: #161a28;
     padding: 70px;
     display: flex;
     flex-flow: column nowrap;
@@ -44,7 +44,9 @@
   }
 </style>
 
-<div id='about' bind:clientHeight={height}>
+<div id='about'
+  style="background-color: {bg_color}"
+  bind:clientHeight={height}>
   <h1>About Kaelan</h1>
   <div class='row'>
     <p>

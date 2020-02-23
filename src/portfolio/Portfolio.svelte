@@ -1,9 +1,9 @@
 <script>
-  export let height;
-
   import { onMount } from 'svelte';
-
   import ClickOutside from 'svelte-click-outside';
+
+  export let bg_color;
+  export let height;
 
   let base = './images/portfolio/';
 
@@ -11,12 +11,12 @@
     {
       title: 'Live Rocket Data Visualiser',
       img: 'plotly.png',
-      text: 'Developed data transfer protocol for realtime transmission of rocket sensor data. Improved analysis capabilities by creating data visualizations with D3.js graphs encapsulated as Python Plotly Dash components'
+      text: 'Visualisation dashboard for UW Rocketry to display live sensor data. Developed data transfer protocol for realtime transmission of rocket sensor data. Improved analysis capabilities by creating data visualizations with D3.js graphs encapsulated as Python Plotly Dash components'
     },
     {
       title: 'Smart Headlamp',
       img: 'smartheadlamp_cropped.jpg',
-      text: 'Created gesture controlled headlamp with deep learning facial recognition via Haar Cascades in OpenCV. Implemented Leap Motion Control using C++. Set up onboard Rasperry Pi and Arduino to control motors, sensors, and lights. Achieved second place, and received Leap Motion award.'
+      text: 'Gesture controlled headlamp with deep learning facial recognition via Haar Cascades in OpenCV. Implemented Leap Motion Control using C++. Set up onboard Rasperry Pi and Arduino to control motors, sensors, and lights. Achieved second place, and received Leap Motion award.'
     },
     {
       title: 'ROS Robot Driver Station',
@@ -36,12 +36,13 @@
     {
       title: 'First Robotics 2018',
       img: 'frc2018.jpg',
-      text: 'FRC2018 temp'
+      text: 'Alliance captain and division winner at 2018 World Championships. Implemented autonomous pathfinding in Java. Used SolidWorks to design robot components. Machined mechanical components out of aluminum.'
     },
     {
       title: 'First Robotics 2017',
       img: 'frc2017.jpg',
-      text: 'FRC2018 temp'
+      text: 'Programmed robot controls in Java, Used SolidWorks to design robot components. Machined mechanical components out of aluminum.'
+
     }
   ];
   
@@ -96,7 +97,6 @@
 <style>
   div#portfolio{
     width: 100%;
-    background-color: #202020;
     padding: 4%;
     display: flex;
     flex-flow: column nowrap;
@@ -187,10 +187,14 @@ scale-down: The smaller of either contain or none. */
   }
 
   img.full{
-    object-fit: contain;
-    flex-grow: 1;
-    flex-shrink: 1;
-    max-height: auto;
+    object-fit: cover;
+    width: 500px;
+    max-height: 300px;
+  }
+
+  #full-frc2018{
+    max-height: 320px;
+    object-position: 50% 40%;
   }
 
   /* not mobile */
@@ -199,6 +203,7 @@ scale-down: The smaller of either contain or none. */
     z-index: 6;
     display: flex;
     flex-flow: column nowrap;
+    align-items: center;
   }
 
   div.displayMain{
@@ -222,6 +227,11 @@ scale-down: The smaller of either contain or none. */
   div.displayLeft{
     left: 0;
   }
+
+  .displayText{
+    width: 500px;
+    margin-top: 30px;
+  }
   
   /* mobile */
   @media all and (max-width: 850px){
@@ -234,11 +244,15 @@ scale-down: The smaller of either contain or none. */
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     margin: 30px 30px;
+    margin-right: auto;
     font-size: 25px;
   }
 </style>
 
-<div id='portfolio' bind:clientHeight={height}>
+<div id='portfolio'
+    style="background-color: {bg_color}"
+    bind:clientHeight={height}
+    on:resize={()=>{console.log('test')}}>
   <h1>Portfolio</h1>
   <div id='portfolio-inner'>
     {#each cols as col}
@@ -274,7 +288,7 @@ scale-down: The smaller of either contain or none. */
             src={base + items[displayedItem].img}
             on:click={()=>{updateDisplayedItem(items[displayedItem].numFromTotal)}}/>
             <!--  </div>  -->
-          <p>{items[displayedItem].text}</p>
+          <p class='displayText'>{items[displayedItem].text}</p>
 
       </div>
     </ClickOutside>
@@ -284,3 +298,5 @@ scale-down: The smaller of either contain or none. */
       </div>
     {/if}
 {/if}
+
+<svelte:window on:resize={updateWidths}/>

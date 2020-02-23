@@ -1,4 +1,5 @@
 <script>
+  export let bg_color;
   export let height=undefined;
   import Skills from './sections/Skills.svelte';
   
@@ -7,8 +8,6 @@
 <style>
   div#skills{
     width: 100%;
-    /* background-color: #161a28; */
-    background-color: #202020;
     padding: 70px;
     display: flex;
     flex-flow: column nowrap;
@@ -24,7 +23,9 @@
   }
 </style>
 
-<div id='skills' bind:clientHeight={height}>
+<div id='skills'
+  style="background-color: {bg_color}"
+  bind:clientHeight={height}>
   <h1>Skills</h1>
   <Skills embedded={true}/>
 </div>

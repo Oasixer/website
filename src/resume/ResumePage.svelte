@@ -1,4 +1,5 @@
 <script>
+  export let bg_color;
   export let height=undefined;
   
   /* let src_uw = './images/uw.png'; */
@@ -7,8 +8,6 @@
 <style>
   div#resumepage{
     width: 100%;
-    /* background-color: #202020; */
-    background-color: #161a28;
     padding: 70px;
     display: flex;
     flex-flow: column nowrap;
@@ -48,10 +47,12 @@
 
 </style>
 
-<div id='resumepage' bind:clientHeight={height}>
+<div id='resumepage'
+  style="background-color: {bg_color}"
+     bind:clientHeight={height}>
   <h1>Resume</h1>
   <div class='row'>
     <button id='download'>Download (TODO Icon)</button>
-    <button>View</button>
+    <!--  <button>View</button>  -->
   </div>
 </div>

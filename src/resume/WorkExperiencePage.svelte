@@ -2,12 +2,12 @@
   export let height=undefined;
   import WorkExperience from './sections/WorkExperience.svelte';
   
+  export let bg_color;
 </script>
 
 <style>
   div#workexperience{
     width: 100%;
-    background-color: #161a28;
     padding: 70px;
     display: flex;
     flex-flow: column nowrap;
@@ -23,7 +23,9 @@
   }
 </style>
 
-<div id='workexperience' bind:clientHeight={height}>
+<div id='workexperience'
+  style="background-color: {bg_color}"
+  bind:clientHeight={height}>
   <h1>Work Experience</h1>
   <WorkExperience embedded={true}/>
 </div>
